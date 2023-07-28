@@ -1,0 +1,1 @@
+import{j as t}from"./index-f37a754a.js";import{m as i}from"./motion-65f5b15b.js";import{T as a}from"./Typography-618cd055.js";const n=()=>t.jsx(i.div,{initial:{opacity:0},animate:{opacity:1},transition:{duration:.75,ease:"easeInOut"},exit:{opacity:0},children:t.jsx(a,{variant:"h4",sx:{textAlign:"center",mb:"15px"},children:"Thuê Sim VIP"})});export{n as default};
