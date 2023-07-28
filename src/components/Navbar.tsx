@@ -97,7 +97,7 @@ const NavbarComponent = () => {
                     <Typography
                         variant="h6"
                         component="div"
-                        sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+                        sx={{ flexGrow: 1, display: { xs: 'none', md: 'block' } }}
                     >
                         yeusimsodep.com
                     </Typography>
@@ -220,14 +220,11 @@ const NavbarComponent = () => {
                         </SwipeableDrawer>
                     </Box >
                     <Typography
-                        variant="h5"
-                        noWrap
-                        sx={{
-                            display: { xs: 'flex', md: 'none' },
-                            flexGrow: 1,
-                        }}
+                        variant="h6"
+                        component="div"
+                        sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
                     >
-                        <img src="/logo.png" alt="" style={{ maxWidth: "80px" }} />
+                        yeusimsodep.com
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {collapseItems.map((page) => (
