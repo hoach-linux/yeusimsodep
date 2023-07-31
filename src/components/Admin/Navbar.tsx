@@ -38,7 +38,7 @@ const NavbarComponent = () => {
                     component="div"
                     sx={{ flexGrow: 1 }}
                 >
-                    SIMDEP10SO.VN
+                    YEUSIMSODEP.COM
                 </Typography>
             </Navbar.Brand>
             {registered &&

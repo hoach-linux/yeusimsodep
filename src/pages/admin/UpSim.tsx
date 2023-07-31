@@ -1,8 +1,11 @@
-import { Alert, Backdrop, Box, Button, CircularProgress, } from "@mui/material";
+import { Alert, Backdrop, Box, Button, CircularProgress, Stack, } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useFetching } from "../../hooks/useFetching";
 import axios from "axios";
 import { CircularProgressWithLabel } from "../../components/CircularProgressWithLabel";
+import SimService from "../../API/SimService";
+import { LoadingButton } from "@mui/lab";
+import { useCheckingRegister } from "../../hooks/useCheckingRegister";
 
 interface IFile {
     size: number | string
@@ -22,36 +25,83 @@ export function UpSim() {
     const openBackdrop = () => {
         setIsBackdrop(true);
     };
-    const [upSim] = useFetching(async () => {
-        try {
-            if (!workerFinished) return
+    const [addSim] = useFetching(async () => {
+        let deletingSims = sims
+        let maxIteration = Math.ceil(deletingSims.length / 100)
 
-            setProgress(0)
-            setDisableButton(!disableButton)
-            openBackdrop()
+        for (let i = 0; i <= maxIteration; ++i) {
+            const newSims = deletingSims.slice(0, 100)
 
-            let deletingSims = sims
-            let maxIteration = Math.ceil(deletingSims.length / 100)
+            if (typeof (deletingSims) === 'object') {
+                deletingSims = deletingSims.slice(100)
 
-            for (let i = 0; i <= maxIteration; ++i) {
-                const newSims = deletingSims.slice(0, 100)
-
-                if (typeof (deletingSims) === 'object') {
-                    deletingSims = deletingSims.slice(100)
-
-                    await axios.post('https://directus.hoach.skryonline.com/items/yeusimsodep', newSims)
-                }
-
-                setProgress(() => findPercent(i, sims.length))
+                await axios.post('https://directus.hoach.skryonline.com/items/yeusimsodep', newSims)
             }
 
-            closeBackdrop()
-            setSims([])
-            setFile(null)
-        } catch (error) {
-            console.log(error)
+            setProgress(() => findPercent(i, sims.length))
         }
     })
+    const [deleteSim, deleteLoading, error] = useFetching(async () => {
+        const sims = await SimService.getSimDelete(10_000, 1);
+        const simsLength = sims.data.length;
+        const timeOut = 20_000;
+
+        if (simsLength > 0) {
+            const maxConcurrentRequests = 5; // Определяем максимальное количество одновременных запросов
+            const chunkedSims = chunkArray(sims.data, maxConcurrentRequests); // Разбиваем массив на части
+
+            const deleteTasks = chunkedSims.map((chunk) => {
+                return chunk.map((item: any) => {
+                    // Передаем идентификатор элемента для удаления
+                    return SimService.deleteSim(item.id);
+                });
+            });
+
+            const flatDeleteTasks = deleteTasks.flat();
+            const results = await Promise.allSettled(flatDeleteTasks);
+            const resolvedTasks = results
+                .filter((result) => result.status === 'fulfilled')
+                .map((result: any) => result.value);
+
+            // Используем Web Worker для выполнения задач на заднем фоне
+            if (window.Worker) {
+                const workerUrl = new URL("../../workers/worker.ts", import.meta.url)
+                const worker = new Worker(workerUrl); // Создаем новый Web Worker
+
+                worker.postMessage({ tasks: resolvedTasks }); // Отправляем задачи на выполнение
+                worker.onmessage = function (e) {
+                    console.log(e.data)
+                    // При завершении всех задач, вызываем функцию deleteSim через setTimeout
+                    setTimeout(() => {
+                        deleteSim();
+                    }, timeOut);
+                };
+            }
+        }
+
+        return
+    });
+    async function upSim() {
+        if (!workerFinished) return
+
+        setProgress(0)
+        setDisableButton(true)
+        openBackdrop()
+
+        await addSim()
+
+        closeBackdrop()
+        setWorkerFinished(false)
+        setSims([])
+        setFile(null)
+    }
+    function chunkArray(array: object[], size: number) {
+        const result = [];
+        for (let i = 0; i < array.length; i += size) {
+            result.push(array.slice(i, i + size));
+        }
+        return result;
+    }
     function findPercent(iterationNumber: number, arrLength: number) {
         return Math.floor(100 / arrLength * iterationNumber * 100)
     }
@@ -85,11 +135,16 @@ export function UpSim() {
     }
 
     useEffect(() => {
-        if (workerFinished) {
-            setDisableButton(false)
-            closeBackdrop()
-        }
-    }, [sims])
+        useCheckingRegister();
+    }, []);
+    useEffect(() => {
+        if (!workerFinished) return
+        closeBackdrop()
+        setDisableButton(false)
+
+        if (!deleteLoading) return
+        setDisableButton(true)
+    }, [sims, deleteLoading])
     useEffect(() => {
         if (file === null) return
         if (typeof file.size !== 'number') return
@@ -128,9 +183,14 @@ export function UpSim() {
                 }
             </Box>
             <Box sx={{ marginTop: "10px" }}>
-                <Button size="large" variant="contained" disabled={disableButton} onClick={upSim}>
-                    Up bảng sim
-                </Button>
+                <Stack direction="row" spacing={2}>
+                    <LoadingButton size="large" variant="outlined" color="error" onClick={deleteSim} loading={deleteLoading}>
+                        Xóa  bảng sim cũ
+                    </LoadingButton>
+                    <Button size="large" variant="contained" disabled={disableButton} onClick={upSim} >
+                        Up bảng sim
+                    </Button>
+                </Stack>
             </Box>
             <Backdrop
                 sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}

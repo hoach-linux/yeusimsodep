@@ -30,59 +30,6 @@ const Home = () => {
         setFilteredSimList(response.data);
         setTotalPage(Math.ceil(response.meta.filter_count / limit));
     });
-    // const [deleteSim, deleteLoading] = useFetching(async () => {
-    //     try {
-    //         const sims = await SimService.getSimDelete(10_000, 1);
-    //         const simsLength = sims.data.length;
-    //         const timeOut = 20_000;
-
-    //         if (simsLength > 0) {
-    //             const maxConcurrentRequests = 5; // Определяем максимальное количество одновременных запросов
-    //             const chunkedSims = chunkArray(sims.data, maxConcurrentRequests); // Разбиваем массив на части
-
-    //             const deleteTasks = chunkedSims.map((chunk) => {
-    //                 return chunk.map((item: any) => {
-    //                     // Передаем идентификатор элемента для удаления
-    //                     return SimService.deleteSim(item.id);
-    //                 });
-    //             });
-
-    //             const flatDeleteTasks = deleteTasks.flat();
-    //             const results = await Promise.allSettled(flatDeleteTasks);
-    //             const resolvedTasks = results
-    //                 .filter((result) => result.status === 'fulfilled')
-    //                 .map((result: any) => result.value);
-
-    //             // Используем Web Worker для выполнения задач на заднем фоне
-    //             if (window.Worker) {
-    //                 const workerUrl = new URL("../workers/worker.ts", import.meta.url)
-    //                 const worker = new Worker(workerUrl); // Создаем новый Web Worker
-
-    //                 worker.postMessage({ tasks: resolvedTasks }); // Отправляем задачи на выполнение
-    //                 worker.onmessage = function (e) {
-    //                     console.log(e.data)
-    //                     // При завершении всех задач, вызываем функцию deleteSim через setTimeout
-    //                     setTimeout(() => {
-    //                         deleteSim();
-    //                     }, timeOut);
-    //                 };
-    //             }
-    //         }
-
-    //         return;
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-
-    // });
-
-    // function chunkArray(array: object[], size: number) {
-    //     const result = [];
-    //     for (let i = 0; i < array.length; i += size) {
-    //         result.push(array.slice(i, i + size));
-    //     }
-    //     return result;
-    // }
 
     useEffect(() => {
         if (searchParams.get("query")) {
@@ -114,7 +61,6 @@ const Home = () => {
             <Helmet>
                 <title>{pageTitle}</title>
             </Helmet>
-            {/* <Button onClick={deleteSim}>Delete</Button> */}
             <Grid.Container gap={1} justify="center">
                 <Grid xs={0} sm={3}>
                     <Sidebar />
