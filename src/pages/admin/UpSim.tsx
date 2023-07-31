@@ -25,6 +25,7 @@ export function UpSim() {
     const openBackdrop = () => {
         setIsBackdrop(true);
     };
+    const [checkRegister] = useCheckingRegister("/admin/login");
     const [addSim] = useFetching(async () => {
         let deletingSims = sims
         let maxIteration = Math.ceil(deletingSims.length / 100)
@@ -135,7 +136,7 @@ export function UpSim() {
     }
 
     useEffect(() => {
-        useCheckingRegister();
+        checkRegister();
     }, []);
     useEffect(() => {
         if (!workerFinished) return
