@@ -1,4 +1,4 @@
-import { Alert, Backdrop, Box, Button, CircularProgress, Stack, } from "@mui/material";
+import { Alert, Backdrop, Box, Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Stack, } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useFetching } from "../../hooks/useFetching";
 import axios from "axios";
@@ -19,13 +19,21 @@ export function UpSim() {
     const [isBackdrop, setIsBackdrop] = useState(false);
     const [progress, setProgress] = useState(0);
     const [workerFinished, setWorkerFinished] = useState<boolean>(false)
+    const [checkRegister] = useCheckingRegister("/admin/login");
+    const [isDialog, setIsDialog] = useState<boolean>(false)
+
     const closeBackdrop = () => {
         setIsBackdrop(false);
     };
     const openBackdrop = () => {
         setIsBackdrop(true);
     };
-    const [checkRegister] = useCheckingRegister("/admin/login");
+    const closeDialog = () => {
+        setIsDialog(false);
+    };
+    const openDialog = () => {
+        setIsDialog(true);
+    };
     const [addSim] = useFetching(async () => {
         let deletingSims = sims
         let maxIteration = Math.ceil(deletingSims.length / 100)
@@ -48,6 +56,8 @@ export function UpSim() {
         const timeOut = 20_000;
 
         if (simsLength > 0) {
+            openDialog()
+
             const maxConcurrentRequests = 5; // Определяем максимальное количество одновременных запросов
             const chunkedSims = chunkArray(sims.data, maxConcurrentRequests); // Разбиваем массив на части
 
@@ -80,6 +90,7 @@ export function UpSim() {
             }
         }
 
+        closeDialog()
         return
     });
     async function upSim() {
@@ -185,8 +196,8 @@ export function UpSim() {
             </Box>
             <Box sx={{ marginTop: "10px" }}>
                 <Stack direction="row" spacing={2}>
-                    <LoadingButton size="large" variant="outlined" color="error" onClick={deleteSim} loading={deleteLoading}>
-                        Xóa  bảng sim cũ
+                    <LoadingButton size="large" variant="outlined" color="error" onClick={openDialog}>
+                        Xóa bảng sim cũ
                     </LoadingButton>
                     <Button size="large" variant="contained" disabled={disableButton} onClick={upSim} >
                         Up bảng sim
@@ -202,6 +213,23 @@ export function UpSim() {
                     <CircularProgressWithLabel value={progress} />
                 }
             </Backdrop>
+            <Dialog
+                open={isDialog}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                    {"Bạn có thực sự muốn xóa bảng sim cũ không?"}
+                </DialogTitle>
+                <DialogActions>
+                    <Button onClick={closeDialog} disabled={deleteLoading}>
+                        {deleteLoading ? <>Đang xóa bảng sim cũ</> : <>Không đồng ý</>}
+                    </Button>
+                    <LoadingButton onClick={deleteSim} autoFocus loading={deleteLoading}>
+                        Đồng ý
+                    </LoadingButton>
+                </DialogActions>
+            </Dialog>
         </Box >
     )
 }

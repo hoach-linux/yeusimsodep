@@ -9,7 +9,7 @@ import { useState } from "react";
 const NavbarComponent = () => {
     const collapseItems = [{ name: "Trang chủ", link: "/admin" }];
     const [checkRegister, checkNotRegister] = useCheckingRegister("/admin/login")
-    const registered = localStorage.getItem("sb-vxdcqhvkrmgpvrdwujld-auth-token");
+    const registered = localStorage.getItem("sb-wzlfkkdcqditzrbxeioy-auth-token");
     const [isOpenMenu, setIsOpenMenu] = useState<null | HTMLElement>(null)
     let open = Boolean(isOpenMenu)
     const navigate = useNavigate()
