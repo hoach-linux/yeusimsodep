@@ -1,6 +1,4 @@
 import { useState, useEffect, lazy } from "react";
-import { Text } from "@nextui-org/react";
-import { Row } from "@nextui-org/react";
 import { useFetching } from "../hooks/useFetching";
 import supabase from "../supabase";
 import { Card, Box, Button, CardActionArea, CardContent, CardMedia, TextField, Typography, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, useMediaQuery } from "@mui/material";

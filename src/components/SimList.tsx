@@ -23,6 +23,14 @@ const SimList = ({ sims, title }: { sims: any; title: any }) => {
   const openSnackbar = (show: boolean) => setShowSnackbar(show);
   const closeSnackbar = () => setShowSnackbar(false);
 
+  sims.map((sim: any) => {
+    if (sim.number[0] !== '0') {
+      sim.number = '0' + sim.number
+    }
+    return sim
+  })
+
+
   return (
     <div>
       {sims.length > 0 && (
