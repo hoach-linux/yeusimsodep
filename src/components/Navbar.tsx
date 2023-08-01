@@ -56,9 +56,9 @@ const NavbarComponent = () => {
     const theme = useTheme();
     const resetPage = useStore((state: any) => state.resetPage);
     const chatMenuList = [
-        { name: "Facebook", link: "https://www.facebook.com/simsodepmobifone.vms" },
-        { name: "Zalo", link: "https://zalo.me/0904887766" },
-        { name: "Tổng đài", link: "tel:+84904388388" }
+        { name: "Facebook", link: "https://www.facebook.com/nghimobifone" },
+        { name: "Zalo", link: "https://zalo.me/+84906266966" },
+        { name: "Tổng đài", link: "tel:+84906266966" }
     ]
 
     const openSimPrice = (): void => setIsOpenSimPrice(!isOpenSimPrice)
