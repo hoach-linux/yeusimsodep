@@ -18,6 +18,7 @@ export default function Sim({
     const providers = {
         mobifone: "b26950bd-e9e5-4d37-a819-76137c3a8bb6",
         viettel: "4bb048f8-5047-44bb-9b3a-c80cb6130e8e",
+        vinaphone: "144f315f-37f2-4de1-90d2-4e98af4f9366"
     };
     const [visible, setVisible] = useState(false);
     const [disable, setDisable] = useState(false);
@@ -94,6 +95,12 @@ export default function Sim({
                         image={`https://directus.hoach.skryonline.com/assets/${providers.viettel}`}
                         alt={sim.provider}
                     />}
+                    {sim.provider.toLowerCase().trim() === "vinaphone" && <CardMedia
+                        component="img"
+                        height="80"
+                        image={`https://directus.hoach.skryonline.com/assets/${providers.vinaphone}`}
+                        alt={sim.provider}
+                    />}
                     <CardContent>
                         <Typography gutterBottom variant="h6" component="div">
                             {sim.number}
@@ -124,6 +131,12 @@ export default function Sim({
                                     component="img"
                                     height="140"
                                     image={`https://directus.hoach.skryonline.com/assets/${providers.viettel}`}
+                                    alt={sim.provider}
+                                />}
+                                {sim.provider.toLowerCase().trim() === "vinaphone" && <CardMedia
+                                    component="img"
+                                    height="140"
+                                    image={`https://directus.hoach.skryonline.com/assets/${providers.vinaphone}`}
                                     alt={sim.provider}
                                 />}
                                 <CardContent>

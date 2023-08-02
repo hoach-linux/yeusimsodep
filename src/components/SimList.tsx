@@ -63,7 +63,7 @@ const SimList = ({ sims, title }: { sims: any; title: any }) => {
           severity="success"
           sx={{ width: "100%" }}
         >
-          Đặt sim thành công
+          Đặt sim thành công. Chúng tôi sẽ sớm liên lạc lại với bạn
         </Alert>
       </Snackbar>
     </div>
