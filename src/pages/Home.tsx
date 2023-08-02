@@ -65,7 +65,7 @@ const Home = () => {
                 <Grid xs={0} sm={3}>
                     <Sidebar />
                 </Grid>
-                <Grid xs={12} sm={9} >
+                <Grid xs={12} sm={9} style={{ padding: 0 }}>
                     {showFilteredList && !loading ? (
                         <div style={{ minWidth: "100%" }}>
                             {filteredSimList.length === 0 && !loading && (

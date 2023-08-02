@@ -81,27 +81,26 @@ export default function Sim({
                 }
             }}>
                 <CardActionArea
+                    sx={{ display: 'flex', justifyContent: "space-around" }}
                     onClick={openModal}
                 >
                     {sim.provider.toLowerCase().trim() === "mobifone" && <CardMedia
                         component="img"
-                        height="80"
+                        sx={{width: "40px", borderRadius: "50%"}}
                         image={`https://directus.hoach.skryonline.com/assets/${providers.mobifone}`}
                         alt={sim.provider}
                     />}
                     {sim.provider.toLowerCase().trim() === "viettel" && <CardMedia
                         component="img"
-                        height="80"
                         image={`https://directus.hoach.skryonline.com/assets/${providers.viettel}`}
                         alt={sim.provider}
                     />}
                     {sim.provider.toLowerCase().trim() === "vinaphone" && <CardMedia
                         component="img"
-                        height="80"
                         image={`https://directus.hoach.skryonline.com/assets/${providers.vinaphone}`}
                         alt={sim.provider}
                     />}
-                    <CardContent>
+                    <CardContent sx={{padding: "16px 5px"}}>
                         <Typography gutterBottom variant="h6" component="div">
                             {sim.number}
                         </Typography>

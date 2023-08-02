@@ -39,10 +39,11 @@ const SimList = ({ sims, title }: { sims: any; title: any }) => {
             {title}
           </Typography>
           <Grid.Container
-            gap={1}
+            gap={0.6}
             justify="flex-start"
             css={{
               marginBottom: "62px",
+              padding: 0,
             }}
           >
             {sims.map((sim: ISim, index: number) => (
