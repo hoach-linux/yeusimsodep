@@ -13,7 +13,7 @@ import SkeletonList from "../components/SkeletonList";
 import { Helmet } from "react-helmet";
 
 const Home = () => {
-    const limit = 24;
+    const limit = 32;
     const [searchParams, setSearchParams] = useSearchParams();
     const [showFilteredList, setShowFilteredList] = useState(false);
     const [filteredSimList, setFilteredSimList] = useState([]);

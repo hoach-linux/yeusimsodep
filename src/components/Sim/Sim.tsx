@@ -1,11 +1,12 @@
 import { useState, useEffect, lazy } from "react";
-import { useFetching } from "../hooks/useFetching";
-import supabase from "../supabase";
+import { useFetching } from "../../hooks/useFetching";
+import supabase from "../../supabase";
 import { Card, Box, Button, CardActionArea, CardContent, CardMedia, TextField, Typography, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, useMediaQuery } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { AccountCircle, Home, Phone } from "@mui/icons-material"
 import { motion } from "framer-motion";
 import { useTheme } from '@mui/material/styles';
+import "./style.css"
 
 export default function Sim({
     sim,
@@ -85,22 +86,27 @@ export default function Sim({
                     onClick={openModal}
                 >
                     {sim.provider.toLowerCase().trim() === "mobifone" && <CardMedia
+                        className="card-image"
                         component="img"
-                        sx={{width: "40px", borderRadius: "50%"}}
+                        sx={{ borderRadius: "50%" }}
                         image={`https://directus.hoach.skryonline.com/assets/${providers.mobifone}`}
                         alt={sim.provider}
                     />}
                     {sim.provider.toLowerCase().trim() === "viettel" && <CardMedia
+                        className="card-image"
                         component="img"
+                        sx={{background: "#fff", borderRadius: "10px"}}
                         image={`https://directus.hoach.skryonline.com/assets/${providers.viettel}`}
                         alt={sim.provider}
                     />}
                     {sim.provider.toLowerCase().trim() === "vinaphone" && <CardMedia
+                        className="card-image"
+                        sx={{background: "#fff", borderRadius: "10px"}}
                         component="img"
                         image={`https://directus.hoach.skryonline.com/assets/${providers.vinaphone}`}
                         alt={sim.provider}
                     />}
-                    <CardContent sx={{padding: "16px 5px"}}>
+                    <CardContent sx={{ padding: "16px 5px", width: '120px' }}>
                         <Typography gutterBottom variant="h6" component="div">
                             {sim.number}
                         </Typography>

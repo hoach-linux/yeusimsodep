@@ -118,11 +118,6 @@ export default class SimService {
             const parametersIndex = parameters.keyword.indexOf("*");
             const lastParametersIndex = parameters.keyword.lastIndexOf("*");
 
-            console.log(parametersIndex, lastParametersIndex, parameters.keyword.slice(
-                parametersIndex + 1,
-                lastParametersIndex
-            ),)
-
             sim = await axios.get(
                 `https://directus.hoach.skryonline.com/items/yeusimsodep`,
                 {
@@ -218,7 +213,7 @@ export default class SimService {
                 `https://directus.hoach.skryonline.com/items/yeusimsodep?filter={"${parameters.items}":{"${parameters.method}":"${parameters.parameter}"}}`,
                 {
                     params: {
-                        limit: 20,
+                        limit: 32,
                         page: page,
                         meta: "filter_count",
                     },
@@ -230,7 +225,7 @@ export default class SimService {
                 `https://directus.hoach.skryonline.com/items/yeusimsodep?${parameters}`,
                 {
                     params: {
-                        limit: 20,
+                        limit: 32,
                         page: page,
                         meta: "filter_count",
                     },

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Grid } from "@nextui-org/react";
-import Sim from "./Sim";
+import Sim from "./Sim/Sim";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import { useState } from "react";
