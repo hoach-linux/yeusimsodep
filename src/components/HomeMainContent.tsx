@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { useFetching } from "../hooks/useFetching";
 import SimService from "../API/SimService";
 import SkeletonList from "./SkeletonList";
-import { Box, Typography } from "@mui/material";
 import { Information } from "./Information/Information";
 
 const HomeMainContent = () => {
@@ -12,24 +11,13 @@ const HomeMainContent = () => {
     const [sims, setSims] = useState([]);
     const [mobifone, setMobifone] = useState([]);
     const [fetchSims, simsLoading] = useFetching(async () => {
-        const response: any = await SimService.getSimFilterPrice("Sim 20 - 50 triệu", 1)
+        const response: any = await SimService.getSim(100, 1)
 
         setSims(response.data);
     });
 
-    const [fetchMobifone, mobifoneLoading] = useFetching(async () => {
-        const response: any = await SimService.getSimByProvider(
-            20,
-            1,
-            "Mobifone"
-        );
-
-        setMobifone(response.data);
-    });
-
     useEffect(() => {
         fetchSims();
-        fetchMobifone();
     }, []);
 
     function changeSearchInput(input: string): void {
@@ -43,23 +31,13 @@ const HomeMainContent = () => {
                 <SkeletonList />
             ) : (
                 <>
-                    {searchInputLength.length < 1 && <SimList sims={sims} title="Sim số đẹp" />}
+                    {searchInputLength.length < 1 && <>
+                        <SimList sims={sims} title="Sim số đẹp" />
+                        <Information />
+                    </>}
+
                 </>
             )}
-            {
-                mobifoneLoading ? (
-                    <SkeletonList />
-                ) : (
-
-                    <>
-                        {searchInputLength.length < 1 &&
-                            <>
-                                <SimList sims={mobifone} title="Mobifone" />
-                                <Information />
-                            </>}
-                    </>
-                )
-            }
         </div>
     );
 };

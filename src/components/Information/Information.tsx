@@ -156,7 +156,7 @@ export function Information() {
                     Thay mặt nhà mạng hỗ trợ các vấn đề phát sinh trong quá trình sử dụng
                 </Typography>
                 <Typography variant="body1" gutterBottom>
-                    Bạn còn băn khoăn gì hãy CHAT hoặc GỌI NGAY cho simdepmobifone.com.vn, chúng tôi sẽ hỗ trợ bạn tất cả các vấn đề liên quan không chỉ là mua bán sim số đẹp.
+                    Bạn còn băn khoăn gì hãy CHAT hoặc GỌI NGAY cho yeusimsodep.com, chúng tôi sẽ hỗ trợ bạn tất cả các vấn đề liên quan không chỉ là mua bán sim số đẹp.
                 </Typography>
             </div>
         </Box>

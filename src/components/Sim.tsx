@@ -74,7 +74,7 @@ export default function Sim({
             }}
             style={{ minWidth: "100%" }}
         >
-            <Card sx={{
+            {typeof sim.price === 'number' && <Card sx={{
                 minWidth: "100%", borderRadius: "12px", transition: ".2s", "&:hover": {
                     borderRadius: "0px"
                 }
@@ -114,12 +114,18 @@ export default function Sim({
                             <CardActionArea
                                 onClick={openModal}
                             >
-                                <CardMedia
+                                {sim.provider.toLowerCase().trim() === "mobifone" && <CardMedia
                                     component="img"
                                     height="140"
                                     image={`https://directus.hoach.skryonline.com/assets/${providers.mobifone}`}
                                     alt={sim.provider}
-                                />
+                                />}
+                                {sim.provider.toLowerCase().trim() === "viettel" && <CardMedia
+                                    component="img"
+                                    height="140"
+                                    image={`https://directus.hoach.skryonline.com/assets/${providers.viettel}`}
+                                    alt={sim.provider}
+                                />}
                                 <CardContent>
                                     <Typography gutterBottom variant="h6" component="div">
                                         {sim.number}
@@ -184,6 +190,7 @@ export default function Sim({
                     </DialogActions>
                 </Dialog>
             </Card >
+            }
         </motion.div>
     );
 }

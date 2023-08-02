@@ -88,9 +88,10 @@ export function UpSim() {
                     }, timeOut);
                 };
             }
+
+            closeDialog()
         }
 
-        closeDialog()
         return
     });
     async function upSim() {
