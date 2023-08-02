@@ -60,15 +60,19 @@ export default class SimService {
         let sim: any;
         const lastElement = parameters.keyword.length - 1;
 
+        if (parameters.keyword[0] === '0') {
+            console.log(parameters.keyword = parameters.keyword.slice(1))
+        }
+
         if (parameters.keyword[0] === "*" && parameters.keyword[parameters.keyword.length - 1] !== "*") {
             sim = await axios.get(
-                `https://directus.hoach.skryonline.com/items/sim_list?filter={"number":{"_ends_with":"${parameters.keyword.slice(
+                `https://directus.hoach.skryonline.com/items/yeusimsodep?filter={"searchNumber":{"_ends_with":"${parameters.keyword.slice(
                     1
                 )}"}}`
             );
         } else if (parameters.keyword[parameters.keyword.length - 1] === "*" && parameters.keyword[0] !== "*") {
             sim = await axios.get(
-                `https://directus.hoach.skryonline.com/items/sim_list?filter={"number":{"_starts_with":"${parameters.keyword.slice(
+                `https://directus.hoach.skryonline.com/items/yeusimsodep?filter={"searchNumber":{"_starts_with":"${parameters.keyword.slice(
                     0,
                     parameters.keyword.length - 1
                 )}"}}`
@@ -81,13 +85,13 @@ export default class SimService {
             const parametersIndex = parameters.keyword.indexOf("*");
 
             sim = await axios.get(
-                `https://directus.hoach.skryonline.com/items/sim_list`,
+                `https://directus.hoach.skryonline.com/items/yeusimsodep`,
                 {
                     params: {
                         filter: {
                             _and: [
                                 {
-                                    number: {
+                                    searchNumber: {
                                         _starts_with: parameters.keyword.slice(
                                             0,
                                             parametersIndex
@@ -95,7 +99,7 @@ export default class SimService {
                                     },
                                 },
                                 {
-                                    number: {
+                                    searchNumber: {
                                         _ends_with: parameters.keyword.slice(
                                             parametersIndex + 1,
                                             lastElement + 1
@@ -120,13 +124,13 @@ export default class SimService {
             ),)
 
             sim = await axios.get(
-                `https://directus.hoach.skryonline.com/items/sim_list`,
+                `https://directus.hoach.skryonline.com/items/yeusimsodep`,
                 {
                     params: {
                         filter: {
                             _and: [
                                 {
-                                    number: {
+                                    searchNumber: {
                                         _nstarts_with: parameters.keyword.slice(
                                             parametersIndex + 1,
                                             lastParametersIndex
@@ -134,7 +138,7 @@ export default class SimService {
                                     },
                                 },
                                 {
-                                    number: {
+                                    searchNumber: {
                                         _nends_with: parameters.keyword.slice(
                                             parametersIndex + 1,
                                             lastParametersIndex
@@ -142,7 +146,7 @@ export default class SimService {
                                     },
                                 },
                                 {
-                                    number: {
+                                    searchNumber: {
                                         _contains: parameters.keyword.slice(
                                             parametersIndex + 1,
                                             lastParametersIndex
@@ -156,11 +160,11 @@ export default class SimService {
             );
         } else {
             sim = await axios.get(
-                `https://directus.hoach.skryonline.com/items/sim_list`,
+                `https://directus.hoach.skryonline.com/items/yeusimsodep`,
                 {
                     params: {
                         filter: {
-                            number: {
+                            searchNumber: {
                                 _contains: parameters.keyword,
                             },
                         },
