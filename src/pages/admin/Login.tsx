@@ -5,6 +5,8 @@ import { Mail } from "../../components/icons/Mail";
 import { useEffect, useState } from "react";
 import { useCheckingRegister } from "../../hooks/useCheckingRegister";
 import { motion } from "framer-motion";
+import { directusClient } from "../../directus";
+import { authentication, rest, login } from "@directus/sdk";
 
 function Login() {
     const [userData, setUserData] = useState({ email: "", password: "" });
@@ -16,6 +18,9 @@ function Login() {
     const [checkRegister, checkNotRegister] = useCheckingRegister("/admin");
     const [showLinkToGmail, setShowLinkToGmail] = useState(false);
     const [signInWithOtp, setSignInWithOtp] = useState(true);
+    const directus = directusClient.with(authentication()).with(rest())
+
+
 
     useEffect(() => {
         checkNotRegister();
@@ -47,6 +52,10 @@ function Login() {
             email: userData.email,
             password: userData.password
         });
+
+        const result = await directus.request(login(userData.email, userData.password))
+
+        localStorage.setItem('directus_token', JSON.stringify(result))
 
         if (error) {
             setErrorMessage(error?.message);

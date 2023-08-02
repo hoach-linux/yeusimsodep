@@ -5,6 +5,8 @@ import { Home, Logout, Menu as MenuIcon } from "@mui/icons-material";
 import supabase from "../../supabase";
 import { useCheckingRegister } from "../../hooks/useCheckingRegister";
 import { useState } from "react";
+import { directusClient } from "../../directus";
+import { authentication, logout, rest } from "@directus/sdk";
 
 const NavbarComponent = () => {
     const collapseItems = [{ name: "Trang chủ", link: "/admin" }];
@@ -19,7 +21,18 @@ const NavbarComponent = () => {
         setIsOpenMenu(event.currentTarget)
     }
     async function logOut() {
+        const getDirectusClient = directusClient.with(authentication()).with(rest())
+        const getDirectusToken = localStorage.getItem('directus_token')
+
         const { error } = await supabase.auth.signOut()
+
+        if (getDirectusToken !== null) {
+            const getRefreshToken: string = JSON.parse(getDirectusToken)?.refresh_token
+
+            const result = await getDirectusClient.request(logout(getRefreshToken));
+
+            localStorage.removeItem('directus_token')
+        }
 
         if (error) {
             console.log(error)

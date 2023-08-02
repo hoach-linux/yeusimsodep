@@ -6,6 +6,7 @@ import { CircularProgressWithLabel } from "../../components/CircularProgressWith
 import SimService from "../../API/SimService";
 import { LoadingButton } from "@mui/lab";
 import { useCheckingRegister } from "../../hooks/useCheckingRegister";
+import { useNavigate } from "react-router-dom";
 
 interface IFile {
     size: number | string
@@ -21,6 +22,15 @@ export function UpSim() {
     const [workerFinished, setWorkerFinished] = useState<boolean>(false)
     const [checkRegister] = useCheckingRegister("/admin/login");
     const [isDialog, setIsDialog] = useState<boolean>(false)
+    const getDirectusToken = localStorage.getItem('directus_token')
+    const navigate = useNavigate()
+    let access_token: string
+
+    if (getDirectusToken !== null) {
+        access_token = JSON.parse(getDirectusToken)?.access_token
+    } else {
+        navigate('/admin/loading')
+    }
 
     const closeBackdrop = () => {
         setIsBackdrop(false);
@@ -44,7 +54,11 @@ export function UpSim() {
             if (typeof (deletingSims) === 'object') {
                 deletingSims = deletingSims.slice(100)
 
-                await axios.post('https://directus.hoach.skryonline.com/items/yeusimsodep', newSims)
+                await axios.post('https://directus.hoach.skryonline.com/items/yeusimsodep', newSims, {
+                    headers: {
+                        Authorization: `Bearer ${access_token}`
+                    }
+                })
             }
 
             setProgress(() => findPercent(i, sims.length))
@@ -64,7 +78,7 @@ export function UpSim() {
             const deleteTasks = chunkedSims.map((chunk) => {
                 return chunk.map((item: any) => {
                     // Передаем идентификатор элемента для удаления
-                    return SimService.deleteSim(item.id);
+                    return SimService.deleteSim(item.id, access_token);
                 });
             });
 
