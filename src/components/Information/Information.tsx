@@ -137,7 +137,7 @@ export function Information() {
                     <br />
                     yesimsodep.com là đại lý cấp 1 tại 3 nhà mạng Viettel, Vinaphone, Mobifone từ 5 năm nay
                     <br />
-                    Với hơn 50.000 người ghé thăm mỗi ngày, simdepmobifone.com.vn luôn có được chính sách giá tốt từ các nhà cung cấp
+                    Với hơn 50.000 người ghé thăm mỗi ngày, yeusimsodep.com luôn có được chính sách giá tốt từ các nhà cung cấp
                     <br />
                     Hệ sinh thái lớn của nhiều ngành nghề dẫn đến tiết kiệm tối đa chi phí từ nhập sim về đến khi tới tay khách hàng
                     <br />

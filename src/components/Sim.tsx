@@ -82,12 +82,18 @@ export default function Sim({
                 <CardActionArea
                     onClick={openModal}
                 >
-                    <CardMedia
+                    {sim.provider.toLowerCase().trim() === "mobifone" && <CardMedia
                         component="img"
                         height="80"
                         image={`https://directus.hoach.skryonline.com/assets/${providers.mobifone}`}
                         alt={sim.provider}
-                    />
+                    />}
+                    {sim.provider.toLowerCase().trim() === "viettel" && <CardMedia
+                        component="img"
+                        height="80"
+                        image={`https://directus.hoach.skryonline.com/assets/${providers.viettel}`}
+                        alt={sim.provider}
+                    />}
                     <CardContent>
                         <Typography gutterBottom variant="h6" component="div">
                             {sim.number}
