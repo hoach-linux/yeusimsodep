@@ -209,7 +209,7 @@ export default class SimService {
                 `https://directus.hoach.skryonline.com/items/yeusimsodep?filter={"${parameters.items}":{"${parameters.method}":"${parameters.parameter}"}}`,
                 {
                     params: {
-                        limit: 16,
+                        limit: 20,
                         page: page,
                         meta: "filter_count",
                     },
@@ -221,7 +221,7 @@ export default class SimService {
                 `https://directus.hoach.skryonline.com/items/yeusimsodep?${parameters}`,
                 {
                     params: {
-                        limit: 16,
+                        limit: 20,
                         page: page,
                         meta: "filter_count",
                     },

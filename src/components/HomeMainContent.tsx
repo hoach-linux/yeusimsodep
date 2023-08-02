@@ -4,20 +4,22 @@ import { useState, useEffect } from "react";
 import { useFetching } from "../hooks/useFetching";
 import SimService from "../API/SimService";
 import SkeletonList from "./SkeletonList";
+import { Box, Typography } from "@mui/material";
+import { Information } from "./Information/Information";
 
 const HomeMainContent = () => {
     const [searchInputLength, setSearchInputLength] = useState('')
     const [sims, setSims] = useState([]);
     const [mobifone, setMobifone] = useState([]);
     const [fetchSims, simsLoading] = useFetching(async () => {
-        const response: any = await SimService.getSimFilterPrice("Sim 10 - 20 triệu", 1)
+        const response: any = await SimService.getSimFilterPrice("Sim 20 - 50 triệu", 1)
 
         setSims(response.data);
     });
 
     const [fetchMobifone, mobifoneLoading] = useFetching(async () => {
         const response: any = await SimService.getSimByProvider(
-            16,
+            20,
             1,
             "Mobifone"
         );
@@ -50,11 +52,15 @@ const HomeMainContent = () => {
                 ) : (
 
                     <>
-                        {searchInputLength.length < 1 && <SimList sims={mobifone} title="Mobifone" />}
+                        {searchInputLength.length < 1 &&
+                            <>
+                                <SimList sims={mobifone} title="Mobifone" />
+                                <Information />
+                            </>}
                     </>
                 )
             }
-        </div >
+        </div>
     );
 };
 

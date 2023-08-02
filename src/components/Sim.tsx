@@ -84,7 +84,7 @@ export default function Sim({
                 >
                     <CardMedia
                         component="img"
-                        height="140"
+                        height="80"
                         image={`https://directus.hoach.skryonline.com/assets/${providers.mobifone}`}
                         alt={sim.provider}
                     />

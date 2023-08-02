@@ -8,7 +8,7 @@ import SimList from "../components/SimList";
 import { useFetching } from "../hooks/useFetching";
 import SimService from "../API/SimService";
 import useStore from "../store/useStore";
-import { Button, Pagination, Typography } from "@mui/material";
+import { Pagination, Typography } from "@mui/material";
 import SkeletonList from "../components/SkeletonList";
 import { Helmet } from "react-helmet";
 
