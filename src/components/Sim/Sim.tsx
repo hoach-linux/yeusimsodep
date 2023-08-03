@@ -95,13 +95,13 @@ export default function Sim({
                     {sim.provider.toLowerCase().trim() === "viettel" && <CardMedia
                         className="card-image"
                         component="img"
-                        sx={{background: "#fff", borderRadius: "10px"}}
+                        sx={{background: "#fff", borderRadius: "12px"}}
                         image={`https://directus.hoach.skryonline.com/assets/${providers.viettel}`}
                         alt={sim.provider}
                     />}
                     {sim.provider.toLowerCase().trim() === "vinaphone" && <CardMedia
                         className="card-image"
-                        sx={{background: "#fff", borderRadius: "10px"}}
+                        sx={{background: "#fff", borderRadius: "12px"}}
                         component="img"
                         image={`https://directus.hoach.skryonline.com/assets/${providers.vinaphone}`}
                         alt={sim.provider}

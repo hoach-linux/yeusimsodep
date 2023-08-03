@@ -3,7 +3,7 @@ import { Grid } from "@nextui-org/react";
 
 
 function SkeletonList() {
-    let skeletonList: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+    let skeletonList: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
 
     return (
         <div >
@@ -24,7 +24,7 @@ function SkeletonList() {
                             animation="wave"
                             sx={{ minWidth: "100%", borderRadius: "12px" }}
                             variant="rectangular"
-                            height={134}
+                            height={100}
                         />
                     </Grid>
                 ))}
