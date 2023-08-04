@@ -80,7 +80,7 @@ export default function SimBase({
                 minWidth: "100%", borderRadius: "12px", transition: ".2s", "&:hover": {
                     borderRadius: "0px"
                 }
-            }}>
+            }} className="base-card">
                 <CardActionArea
                     sx={{ display: 'flex', justifyContent: "space-around" }}
                     onClick={openModal}
@@ -106,12 +106,15 @@ export default function SimBase({
                         image={`https://directus.hoach.skryonline.com/assets/${providers.vinaphone}`}
                         alt={sim.provider}
                     />}
-                    <CardContent sx={{ padding: "16px 5px", width: '120px' }}>
-                        <Typography gutterBottom variant="h6" component="div">
+                    <CardContent sx={{ padding: "16px 5px", width: '120px' }} className="base__card-content">
+                        <Typography gutterBottom variant="h6" component="div" className="text">
                             {sim.number}
                         </Typography>
-                        <Typography variant="body2" color="text.secondary">
+                        <Typography variant="body2" color="text.secondary" className="text">
                             {sim.price.toLocaleString("vn")}₫
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary" className="text-hover">
+                            Mua sim
                         </Typography>
                     </CardContent>
                 </CardActionArea>
