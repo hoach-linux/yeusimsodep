@@ -18,6 +18,12 @@ export default class SimService {
         );
         return sim.data;
     }
+    static async getSimById(id: number) {
+        const sim = await axios.get(
+            `https://directus.hoach.skryonline.com/items/yeusimsodep/${id}`,
+        );
+        return sim.data;
+    }
     static async getSimDelete(limit: number, page: number) {
         const sim = await axios.get(
             `https://directus.hoach.skryonline.com/items/yeusimsodep`,
@@ -61,7 +67,7 @@ export default class SimService {
         const lastElement = parameters.keyword.length - 1;
 
         if (parameters.keyword[0] === '0') {
-            console.log(parameters.keyword = parameters.keyword.slice(1))
+            parameters.keyword = parameters.keyword.slice(1)
         }
 
         if (parameters.keyword[0] === "*" && parameters.keyword[parameters.keyword.length - 1] !== "*") {

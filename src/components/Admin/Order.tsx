@@ -11,6 +11,9 @@ import { useState } from "react";
 import { useFetching } from "../../hooks/useFetching";
 import supabase from "../../supabase";
 import { useLocation } from "react-router-dom";
+import SimService from "../../API/SimService";
+import { directusClient } from "../../directus";
+import { authentication, logout, rest } from "@directus/sdk";
 
 export default function Order({ order }: { order: any }) {
   const sim = order.sim;
@@ -18,7 +21,40 @@ export default function Order({ order }: { order: any }) {
   const [disable, setDisable] = useState(false);
   const [finishVisible, setFinishVisible] = useState(false);
   const [finishDisable, setFinishDisable] = useState(false);
+  const directusToken = localStorage.getItem("directus_token")
+  let accessTokenDirectus: string
 
+  if (directusToken !== null) {
+    accessTokenDirectus = JSON.parse(directusToken).access_token
+  }
+  const [deleteSim] = useFetching(async () => {
+    try {
+      const response = await SimService.deleteSim(sim.id, accessTokenDirectus)
+    } catch (error: any) {
+      if (error.response.status === 401) {
+        console.log('yeah')
+        logOut()
+      }
+    }
+  })
+  async function logOut() {
+    const getDirectusClient = directusClient.with(authentication()).with(rest())
+    const getDirectusToken = localStorage.getItem('directus_token')
+
+    const { error } = await supabase.auth.signOut()
+
+    if (getDirectusToken !== null) {
+      const getRefreshToken: string = JSON.parse(getDirectusToken)?.refresh_token
+
+      const result = await getDirectusClient.request(logout(getRefreshToken));
+
+      localStorage.removeItem('directus_token')
+    }
+
+    if (error) {
+      console.log(error)
+    }
+  }
   const openModal = () => setVisible(!visible);
   const closeModal = () => setVisible(false);
   const openFinishModal = () => setFinishVisible(!visible);
@@ -35,6 +71,7 @@ export default function Order({ order }: { order: any }) {
   const [finishOrder, finishOrderLoading] = useFetching(async () => {
     setFinishDisable(false)
 
+    await deleteSim()
     const { data, error } = await supabase
       .from("orders")
       .update({ status: "archived" })

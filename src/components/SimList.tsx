@@ -3,7 +3,7 @@ import { Grid } from "@nextui-org/react";
 import Sim from "./Sim/Sim";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Typography } from "@mui/material";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
@@ -22,13 +22,19 @@ const SimList = ({ sims, title }: { sims: any; title: any }) => {
   const [showSnackbar, setShowSnackbar] = useState(false);
   const openSnackbar = (show: boolean) => setShowSnackbar(show);
   const closeSnackbar = () => setShowSnackbar(false);
+  const [simsList, setSimsList] = useState([])
+  const updateSimList = (simList: any) => {
+    setSimsList(simList)
+  }
 
-  sims.map((sim: any) => {
-    if (sim.number[0] !== '0') {
-      sim.number = '0' + sim.number
-    }
-    return sim
-  })
+  useEffect(() => {
+    setSimsList(sims.map((sim: any) => {
+      if (sim.number[0] !== '0') {
+        sim.number = '0' + sim.number
+      }
+      return sim
+    }))
+  }, [sims])
 
 
   return (
@@ -46,9 +52,9 @@ const SimList = ({ sims, title }: { sims: any; title: any }) => {
               padding: 0,
             }}
           >
-            {sims.map((sim: ISim, index: number) => (
+            {simsList.map((sim: ISim, index: number) => (
               <Grid xs={6} sm={3} key={index}>
-                <Sim sim={sim} openSnackbar={openSnackbar} />
+                <Sim sim={sim} updateSimList={updateSimList} openSnackbar={openSnackbar} />
               </Grid>
             ))}
           </Grid.Container>

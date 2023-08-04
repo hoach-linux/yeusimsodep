@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Loading from "../components/Loading/Loading";
 import { UpSim } from "../pages/admin/UpSim";
 import AdminHome from "../pages/admin/AdminHome";
+import { DeleteSim } from "../pages/admin/DeleteSim";
 
 const ThueSimVip = lazy(() => import('../pages/ThueSimVip'));
 const Home = lazy(() => import('../pages/Home'));
@@ -45,6 +46,7 @@ export const routes = createBrowserRouter([
       { path: "login", element: <Login /> },
       { path: "finished_order", element: <FinishedOrder /> },
       { path: "up_sim", element: <UpSim /> },
+      { path: "delete_sim", element: <DeleteSim /> },
     ],
   },
 ]);

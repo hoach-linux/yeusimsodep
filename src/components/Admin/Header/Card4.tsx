@@ -2,8 +2,8 @@ import { Typography } from "@mui/material";
 import { Card, Col, Text } from "@nextui-org/react";
 import { Link } from "react-router-dom";
 
-export const Card3 = () => (
-    <Link to="/admin/up_sim" style={{ minWidth: "100%" }}>
+export const Card4 = () => (
+    <Link to="/admin/delete_sim" style={{ minWidth: "100%" }}>
         <Card
             isPressable
             css={{ minWidth: "320px", minHeight: "320px", height: "340px" }}
@@ -21,12 +21,12 @@ export const Card3 = () => (
             >
                 <Col>
                     <Typography variant="h4" color="white">
-                        Up sim
+                        Xóa sim
                     </Typography>
                 </Col>
             </Card.Body>
             <Card.Image
-                src="https://cdn.dribbble.com/users/293796/screenshots/10479688/db-space-animation.gif"
+                src="https://media.tenor.com/9vRAkntogEMAAAAd/background.gif"
                 objectFit="cover"
                 width="100%"
                 height={340}

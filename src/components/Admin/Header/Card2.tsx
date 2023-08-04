@@ -20,11 +20,18 @@ export const Card2 = () => (
         }}
       >
         <Col>
-          <Typography variant="h4">
+          <Typography variant="h4" color="white">
             Đơn đặt hàng đã hoàn thành
           </Typography>
         </Col>
       </Card.Body>
+      <Card.Image
+        src="https://i.pinimg.com/originals/21/5c/7f/215c7fdca6033092baa04b35c17466bd.gif"
+        objectFit="cover"
+        width="100%"
+        height={340}
+        alt="Card image background"
+      />
     </Card>
   </Link>
 );
