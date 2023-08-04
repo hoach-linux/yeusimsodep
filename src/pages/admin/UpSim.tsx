@@ -7,6 +7,7 @@ import SimService from "../../API/SimService";
 import { LoadingButton } from "@mui/lab";
 import { useCheckingRegister } from "../../hooks/useCheckingRegister";
 import { useNavigate } from "react-router-dom";
+import { useCheckingRegisterDirectus } from "../../hooks/useCheckingRegisterDirectus";
 
 interface IFile {
     size: number | string
@@ -20,10 +21,10 @@ export function UpSim() {
     const [isBackdrop, setIsBackdrop] = useState(false);
     const [progress, setProgress] = useState(0);
     const [workerFinished, setWorkerFinished] = useState<boolean>(false)
-    const [checkRegister] = useCheckingRegister("/admin/login");
     const [isDialog, setIsDialog] = useState<boolean>(false)
     const getDirectusToken = localStorage.getItem('directus_token')
     const navigate = useNavigate()
+    const [checkRegisterDirectus] = useCheckingRegisterDirectus()
     let access_token: string
 
     if (getDirectusToken !== null) {
@@ -162,7 +163,7 @@ export function UpSim() {
     }
 
     useEffect(() => {
-        checkRegister();
+        checkRegisterDirectus();
     }, []);
     useEffect(() => {
         if (!workerFinished) return

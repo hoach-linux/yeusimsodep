@@ -56,6 +56,7 @@ function Login() {
         const result = await directus.request(login(userData.email, userData.password))
 
         localStorage.setItem('directus_token', JSON.stringify(result))
+        localStorage.setItem('registeration_time', JSON.stringify(Date.now()))
 
         if (error) {
             setErrorMessage(error?.message);

@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react"
 import Header from "../../components/Header/Header"
-import { useCheckingRegister } from "../../hooks/useCheckingRegister"
+import { useCheckingRegisterDirectus } from "../../hooks/useCheckingRegisterDirectus"
 
 export function DeleteSim() {
     const [searchInputLength, setSearchInputLength] = useState('')
-    const [checkRegister] = useCheckingRegister("/admin/login")
+    const [checkRegisterDirectus] = useCheckingRegisterDirectus()
 
     function changeSearchInput(input: string): void {
         setSearchInputLength(input)
     }
 
     useEffect(() => {
-        checkRegister();
+        checkRegisterDirectus();
     }, []);
     return (
         <div style={{ minWidth: "100%", marginTop: "20px", padding: "0 12px" }}>
