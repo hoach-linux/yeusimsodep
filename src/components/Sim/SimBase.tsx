@@ -208,7 +208,7 @@ export default function SimBase({
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={closeModal} color="error">Đóng</Button>
-                        <LoadingButton onClick={order} loading={orderLoading}>Mua</LoadingButton>
+                        <LoadingButton onClick={order} loading={orderLoading} variant="contained">Mua</LoadingButton>
                     </DialogActions>
                 </Dialog>
             </Card >
