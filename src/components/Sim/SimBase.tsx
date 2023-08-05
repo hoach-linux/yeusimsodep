@@ -1,11 +1,11 @@
-import { useState, useEffect, lazy } from "react";
+import { useState, useEffect } from "react";
 import { useFetching } from "../../hooks/useFetching";
 import supabase from "../../supabase";
-import { Card, Box, Button, CardActionArea, CardContent, CardMedia, TextField, Typography, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, useMediaQuery } from "@mui/material";
+import { Card, Box, Button, CardActionArea, CardContent, CardMedia, TextField, Typography, Dialog, DialogActions, DialogContent, DialogTitle, useMediaQuery } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { AccountCircle, Home, Phone } from "@mui/icons-material"
 import { motion } from "framer-motion";
-import { useTheme } from '@mui/material/styles';
+import { useTheme, Theme } from '@mui/material/styles';
 import "./style.css"
 
 export default function SimBase({
@@ -31,7 +31,8 @@ export default function SimBase({
         status: "active",
     });
     const [showRequired, setShowRequired] = useState(false);
-    const theme = useTheme()
+    const theme: Theme = useTheme()
+    const isDarkMode = theme.palette.mode === 'dark'
     const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
     const [orderingSim, orderLoading] = useFetching(async () => {
         const { data, error } = await supabase.from("orders").insert([orderData]);

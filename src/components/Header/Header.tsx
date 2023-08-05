@@ -8,6 +8,7 @@ import SimList from "../SimList";
 import { ClickAwayListener, Divider, IconButton, InputBase, Paper, Tooltip, Typography } from "@mui/material";
 import { Clear, Info, Search } from "@mui/icons-material";
 import SkeletonList from "../SkeletonList";
+import { useTheme, Theme } from "@mui/material/styles";
 
 interface IHeader {
 	changeSearchInput: (element: string) => void
@@ -19,6 +20,8 @@ const Header: FC<IHeader> = ({ changeSearchInput }) => {
 	const [searchInput, setSearchInput] = useState("");
 	const [searchTitle, setSearchTitle] = useState("");
 	const [clickedSearchIcon, setClickedSearchIcon] = useState(false)
+	const theme: Theme = useTheme()
+	const isDarkMode = theme.palette.mode === 'dark'
 	const [searching, searchLoading] = useFetching(async () => {
 		if (searchInput.length <= 0) return
 
@@ -55,13 +58,13 @@ const Header: FC<IHeader> = ({ changeSearchInput }) => {
 					<Paper
 						component="form"
 						sx={{
-							p: '2px 4px', display: 'flex', alignItems: 'center', minWidth: "100%", mb: "10px",
+							p: '2px 4px', display: 'flex', alignItems: 'center', minWidth: "100%", mb: "10px", boxShadow: "none", border: isDarkMode ? "1px solid #313131" : "1px solid #ECECEC"
 						}}
 					>
 						<InputBase
 							onChange={(e: any) => setSearchInput(e.target.value)}
 							value={searchInput}
-							sx={{ ml: 1, flex: 1, }}
+							sx={{ ml: 1, flex: 1 }}
 							placeholder="Tìm sim trên yeusimsodep"
 							inputProps={{ 'aria-label': 'tìm sim trên yeusimsodep' }}
 							onKeyDown={searchByEnter}
@@ -86,6 +89,9 @@ const Header: FC<IHeader> = ({ changeSearchInput }) => {
 								placement="bottom-end"
 								onClose={() => setIsOpen(false)}
 								open={isOpen}
+								disableFocusListener
+								disableHoverListener
+								disableTouchListener
 								title={
 									<>
 										<Typography>• Tìm sim có số  đuôi 6789 hãy gõ *6789</Typography>
@@ -100,7 +106,6 @@ const Header: FC<IHeader> = ({ changeSearchInput }) => {
 								</IconButton>
 							</Tooltip>
 						</ClickAwayListener>
-
 					</Paper>
 				</Grid.Container>
 				{searchSim.length >= 1 ? (
