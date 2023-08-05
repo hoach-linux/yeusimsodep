@@ -100,11 +100,14 @@ const NavbarComponent = () => {
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Typography
-                        variant="h6"
-                        component="div"
-                        sx={{ flexGrow: 1, display: { xs: 'none', md: 'block' }, color: isDarkMode ? '#fff' : '#000' }}
+                        variant="h5"
+                        sx={{
+                            mr: 2,
+                            display: { xs: 'none', md: 'flex' },
+                            flexGrow: 1
+                        }}
                     >
-                        yeusimsodep.com
+                        <img src="/logo-no-background.png" alt="logo-white" style={{ height: "50px", width: "50px", background: "#000", borderRadius: "50%" }} />
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
@@ -228,11 +231,13 @@ const NavbarComponent = () => {
                         </SwipeableDrawer>
                     </Box >
                     <Typography
-                        variant="h6"
-                        component="div"
-                        sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, color: isDarkMode ? '#fff' : '#000' }}
+                        variant="h5"
+                        sx={{
+                            display: { xs: 'flex', md: 'none' },
+                            flexGrow: 1
+                        }}
                     >
-                        yeusimsodep.com
+                        <img src="/logo-no-background.png" alt="logo-white" style={{ height: "50px", width: "50px", background: "#000", borderRadius: "50%" }} />
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {collapseItems.map((page) => (
