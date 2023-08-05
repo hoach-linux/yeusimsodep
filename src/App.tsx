@@ -10,16 +10,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { useTheme, Theme } from "@mui/material/styles";
 
 
-interface Props {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  window?: () => Window;
-  children: React.ReactElement;
-}
-
-function App(props: Props) {
+function App() {
   const mode = useStore((state: any) => state.mode)
   const lightMode = useStore((state: any) => state.lightMode)
   const theme: Theme = useTheme()
@@ -48,7 +39,7 @@ function App(props: Props) {
       >
         <Outlet />
       </Box>
-      <ScrollTop {...props}>
+      <ScrollTop>
         <Fab aria-label="scroll back to top"
           sx={{
             border: isDarkMode ? "1px solid #313131" : "1px solid #ECECEC",
