@@ -113,6 +113,7 @@ const NavbarComponent = () => {
                             aria-controls="menu-appbar"
                             aria-haspopup="true"
                             onClick={openDrawer}
+                            sx={{ color: isDarkMode ? '#fff' : '#000' }}
                         >
                             <MenuIcon />
                         </IconButton>
@@ -121,6 +122,9 @@ const NavbarComponent = () => {
                             open={isOpenDrawer}
                             onClose={() => setIsOpenDrawer(false)}
                             onOpen={() => setIsOpenDrawer(true)}
+                            sx={{
+                                background: isDarkMode ? 'rgba(18, 18, 18, 0.5)' : "rgba(255, 255, 255, 0.5)", backdropFilter: "blur(10px)",
+                            }}
                         >
                             <DrawerHeader>
                                 <IconButton onClick={() => setIsOpenDrawer(false)}>
@@ -226,7 +230,7 @@ const NavbarComponent = () => {
                     <Typography
                         variant="h6"
                         component="div"
-                        sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
+                        sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, color: isDarkMode ? '#fff' : '#000' }}
                     >
                         yeusimsodep.com
                     </Typography>
