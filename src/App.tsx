@@ -38,7 +38,7 @@ function App(props: Props) {
     <ThemeProvider theme={customTheme}>
       <CssBaseline />
       <Navbar />
-      <Toolbar id="back-to-top-anchor" />
+      <div id="back-to-top-anchor" />
       <Box
         css={{
           maxWidth: "1380px",
