@@ -54,6 +54,7 @@ const NavbarComponent = () => {
     const darkMode = useStore((state: any) => state.darkMode)
     const pageUrl = window.location.pathname;
     const theme = useTheme();
+    const isDarkMode = theme.palette.mode === "dark"
     const resetPage = useStore((state: any) => state.resetPage);
     const chatMenuList = [
         { name: "Facebook", link: "https://www.facebook.com/nghimobifone" },
@@ -91,13 +92,17 @@ const NavbarComponent = () => {
     }));
 
     return (
-        <AppBar position="sticky" color="primary" sx={{ background: "#000" }} >
+        <AppBar position="sticky" color="primary" sx={{
+            background: isDarkMode ? 'rgba(18, 18, 18, 0.5)' : "rgba(255, 255, 255, 0.5)", backdropFilter: "blur(10px)",
+            borderBottom: isDarkMode ? "1px solid #313131" : "1px solid #ECECEC",
+            boxShadow: "none"
+        }} >
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Typography
                         variant="h6"
                         component="div"
-                        sx={{ flexGrow: 1, display: { xs: 'none', md: 'block' } }}
+                        sx={{ flexGrow: 1, display: { xs: 'none', md: 'block' }, color: isDarkMode ? '#fff' : '#000' }}
                     >
                         yeusimsodep.com
                     </Typography>
@@ -107,7 +112,6 @@ const NavbarComponent = () => {
                             aria-label="account of current user"
                             aria-controls="menu-appbar"
                             aria-haspopup="true"
-                            color="inherit"
                             onClick={openDrawer}
                         >
                             <MenuIcon />
@@ -211,8 +215,8 @@ const NavbarComponent = () => {
                                             </List>
                                         </Collapse>
                                         <ListItemButton onClick={changeTheme}>
-                                            <ListItemText primary={theme.palette.mode === "dark" ? "Chế độ sáng" : "Chế độ tối"} />
-                                            {theme.palette.mode === "dark" ? <SunIcon /> : <MoonIcon />}
+                                            <ListItemText primary={isDarkMode ? "Chế độ sáng" : "Chế độ tối"} />
+                                            {isDarkMode ? <SunIcon /> : <MoonIcon />}
                                         </ListItemButton>
                                     </>
                                 )}
@@ -234,7 +238,7 @@ const NavbarComponent = () => {
                                 onClick={() => setPageTitle('SIM Số Đẹp - Kho SIM đẹp giá rẻ từ【299k】- simdep10so.vn')}
                             >
                                 <Button
-                                    sx={{ my: 2, color: 'white', display: 'block' }}
+                                    sx={{ my: 2, color: isDarkMode ? '#fff' : '#000' }}
                                 >
                                     {page.name}
                                 </Button>
@@ -245,10 +249,11 @@ const NavbarComponent = () => {
                         <IconButton sx={{
                             ml: 1,
                             display: { xs: 'none', md: 'inline-flex' },
-                        }} onClick={changeTheme} color="inherit">
-                            {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+                            color: isDarkMode ? '#fff' : '#000'
+                        }} onClick={changeTheme} >
+                            {isDarkMode ? <Brightness7Icon /> : <Brightness4Icon />}
                         </IconButton>
-                        <IconButton onClick={(event) => setAnchorElChat(event.currentTarget)} color="inherit">
+                        <IconButton onClick={(event) => setAnchorElChat(event.currentTarget)} sx={{ color: isDarkMode ? '#fff' : '#000' }}>
                             <PermPhoneMsg />
                         </IconButton>
                         <Menu
