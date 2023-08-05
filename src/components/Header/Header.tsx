@@ -58,7 +58,10 @@ const Header: FC<IHeader> = ({ changeSearchInput }) => {
 					<Paper
 						component="form"
 						sx={{
-							p: '2px 4px', display: 'flex', alignItems: 'center', minWidth: "100%", mb: "10px", boxShadow: "none", border: isDarkMode ? "1px solid #313131" : "1px solid #ECECEC"
+							p: '2px 4px', display: 'flex', alignItems: 'center', minWidth: "100%", mb: "10px", boxShadow: "none",
+							border: isDarkMode ? "1px solid #313131" : "1px solid #ECECEC",
+							background: isDarkMode ? "rgba(31, 31, 31, 0.5)" : "rgba(245, 245, 246, 0.5)",
+							backdropFilter: "blur(8px)"
 						}}
 					>
 						<InputBase
