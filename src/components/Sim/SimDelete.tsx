@@ -11,11 +11,9 @@ import SimService from "../../API/SimService";
 
 export default function SimDelete({
     sim,
-    openSnackbar,
     updateSimList
 }: {
     sim: any;
-    openSnackbar: any;
     updateSimList: (simList: any) => void
 }) {
     console.log(sim)

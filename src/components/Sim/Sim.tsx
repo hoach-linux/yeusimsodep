@@ -1,28 +1,39 @@
 import "./style.css"
 import { useLocation } from "react-router-dom";
-import SimBase from "./SimBase";
+import { SimBase } from "./SimBase";
 import SimDelete from "./SimDelete";
+import React, { FC } from "react";
 
-export default function Sim({
-    sim,
-    updateSimList,
-    openSnackbar,
-}: {
+interface ISimProps {
     sim: any;
     updateSimList: (simList: any) => void
-    openSnackbar: any;
-}) {
+    openModal: (isVisible: boolean) => void
+    updateSimContent: (newSim: any) => void
+}
+
+const Sim: FC<ISimProps> = ({
+    sim,
+    updateSimList,
+    openModal,
+    updateSimContent,
+}) => {
 
     const location = useLocation()
 
     if (location.pathname === '/') {
         return (
-            <SimBase sim={sim} openSnackbar={openSnackbar} />
+            <SimBase
+                sim={sim}
+                updateSimContent={updateSimContent}
+                openModal={openModal}
+            />
         )
     }
     if (location.pathname === '/admin/delete_sim') {
         return (
-            <SimDelete sim={sim} updateSimList={updateSimList} openSnackbar={openSnackbar} />
+            <SimDelete sim={sim} updateSimList={updateSimList} />
         )
     }
 }
+
+export default React.memo(Sim)
