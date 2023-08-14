@@ -73,21 +73,21 @@ export default function SimDelete({
                         className="card-image"
                         component="img"
                         sx={{ borderRadius: "50%" }}
-                        image={`https://directus.hoach.skryonline.com/assets/${providers.mobifone}`}
+                        image={`https://directus.hoachnt.com/assets/${providers.mobifone}`}
                         alt={sim?.provider}
                     />}
                     {sim?.provider.toLowerCase().trim() === "viettel" && <CardMedia
                         className="card-image"
                         component="img"
                         sx={{ background: "#fff", borderRadius: "12px" }}
-                        image={`https://directus.hoach.skryonline.com/assets/${providers.viettel}`}
+                        image={`https://directus.hoachnt.com/assets/${providers.viettel}`}
                         alt={sim?.provider}
                     />}
                     {sim?.provider.toLowerCase().trim() === "vinaphone" && <CardMedia
                         className="card-image"
                         sx={{ background: "#fff", borderRadius: "12px" }}
                         component="img"
-                        image={`https://directus.hoach.skryonline.com/assets/${providers.vinaphone}`}
+                        image={`https://directus.hoachnt.com/assets/${providers.vinaphone}`}
                         alt={sim?.provider}
                     />}
                     <CardContent sx={{ padding: "16px 5px", width: '120px' }}>

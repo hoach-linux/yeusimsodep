@@ -154,19 +154,19 @@ const SimList = ({ sims, title }: { sims: any; title: any }) => {
                                 {simContent.provider.toLowerCase().trim() === "mobifone" && <CardMedia
                                     component="img"
                                     height="140"
-                                    image={`https://directus.hoach.skryonline.com/assets/${providers.mobifone}`}
+                                    image={`https://directus.hoachnt.com/assets/${providers.mobifone}`}
                                     alt={simContent.provider}
                                 />}
                                 {simContent.provider.toLowerCase().trim() === "viettel" && <CardMedia
                                     component="img"
                                     height="140"
-                                    image={`https://directus.hoach.skryonline.com/assets/${providers.viettel}`}
+                                    image={`https://directus.hoachnt.com/assets/${providers.viettel}`}
                                     alt={simContent.provider}
                                 />}
                                 {simContent.provider.toLowerCase().trim() === "vinaphone" && <CardMedia
                                     component="img"
                                     height="140"
-                                    image={`https://directus.hoach.skryonline.com/assets/${providers.vinaphone}`}
+                                    image={`https://directus.hoachnt.com/assets/${providers.vinaphone}`}
                                     alt={simContent.provider}
                                 />}
                                 <CardContent>

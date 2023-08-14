@@ -8,7 +8,7 @@ interface ISearch {
 export default class SimService {
     static async getSim(limit: number, page: number) {
         const sim = await axios.get(
-            `https://directus.hoach.skryonline.com/items/yeusimsodep`,
+            `https://directus.hoachnt.com/items/yeusimsodep`,
             {
                 params: {
                     limit: limit,
@@ -20,13 +20,13 @@ export default class SimService {
     }
     static async getSimById(id: number) {
         const sim = await axios.get(
-            `https://directus.hoach.skryonline.com/items/yeusimsodep/${id}`,
+            `https://directus.hoachnt.com/items/yeusimsodep/${id}`,
         );
         return sim.data;
     }
     static async getSimDelete(limit: number, page: number) {
         const sim = await axios.get(
-            `https://directus.hoach.skryonline.com/items/yeusimsodep`,
+            `https://directus.hoachnt.com/items/yeusimsodep`,
             {
                 params: {
                     limit: limit,
@@ -38,7 +38,7 @@ export default class SimService {
     }
     static async deleteSim(id: number, token: string) {
         await axios.delete(
-            `https://directus.hoach.skryonline.com/items/yeusimsodep/${id}`,
+            `https://directus.hoachnt.com/items/yeusimsodep/${id}`,
             {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -52,7 +52,7 @@ export default class SimService {
         provider: string
     ) {
         const sim = await axios.get(
-            `https://directus.hoach.skryonline.com/items/yeusimsodep?filter={"provider":"${provider}"}`,
+            `https://directus.hoachnt.com/items/yeusimsodep?filter={"provider":"${provider}"}`,
             {
                 params: {
                     limit: limit,
@@ -72,13 +72,13 @@ export default class SimService {
 
         if (parameters.keyword[0] === "*" && parameters.keyword[parameters.keyword.length - 1] !== "*") {
             sim = await axios.get(
-                `https://directus.hoach.skryonline.com/items/yeusimsodep?filter={"searchNumber":{"_ends_with":"${parameters.keyword.slice(
+                `https://directus.hoachnt.com/items/yeusimsodep?filter={"searchNumber":{"_ends_with":"${parameters.keyword.slice(
                     1
                 )}"}}`
             );
         } else if (parameters.keyword[parameters.keyword.length - 1] === "*" && parameters.keyword[0] !== "*") {
             sim = await axios.get(
-                `https://directus.hoach.skryonline.com/items/yeusimsodep?filter={"searchNumber":{"_starts_with":"${parameters.keyword.slice(
+                `https://directus.hoachnt.com/items/yeusimsodep?filter={"searchNumber":{"_starts_with":"${parameters.keyword.slice(
                     0,
                     parameters.keyword.length - 1
                 )}"}}`
@@ -91,7 +91,7 @@ export default class SimService {
             const parametersIndex = parameters.keyword.indexOf("*");
 
             sim = await axios.get(
-                `https://directus.hoach.skryonline.com/items/yeusimsodep`,
+                `https://directus.hoachnt.com/items/yeusimsodep`,
                 {
                     params: {
                         filter: {
@@ -125,7 +125,7 @@ export default class SimService {
             const lastParametersIndex = parameters.keyword.lastIndexOf("*");
 
             sim = await axios.get(
-                `https://directus.hoach.skryonline.com/items/yeusimsodep`,
+                `https://directus.hoachnt.com/items/yeusimsodep`,
                 {
                     params: {
                         filter: {
@@ -161,7 +161,7 @@ export default class SimService {
             );
         } else {
             sim = await axios.get(
-                `https://directus.hoach.skryonline.com/items/yeusimsodep`,
+                `https://directus.hoachnt.com/items/yeusimsodep`,
                 {
                     params: {
                         filter: {
@@ -216,7 +216,7 @@ export default class SimService {
 
         async function fetchingSim(parameters: any) {
             return await axios.get(
-                `https://directus.hoach.skryonline.com/items/yeusimsodep?filter={"${parameters.items}":{"${parameters.method}":"${parameters.parameter}"}}`,
+                `https://directus.hoachnt.com/items/yeusimsodep?filter={"${parameters.items}":{"${parameters.method}":"${parameters.parameter}"}}`,
                 {
                     params: {
                         limit: 32,
@@ -228,7 +228,7 @@ export default class SimService {
         }
         async function fetchingSimWithParameters(parameters: any) {
             return await axios.get(
-                `https://directus.hoach.skryonline.com/items/yeusimsodep?${parameters}`,
+                `https://directus.hoachnt.com/items/yeusimsodep?${parameters}`,
                 {
                     params: {
                         limit: 32,
@@ -395,7 +395,7 @@ export default class SimService {
     }
     static async postSimOrder(simOrder: object) {
         await axios.post(
-            "https://directus.hoach.skryonline.com/items/sim_order",
+            "https://directus.hoachnt.com/items/sim_order",
             simOrder
         );
     }

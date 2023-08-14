@@ -55,7 +55,7 @@ export function UpSim() {
             if (typeof (deletingSims) === 'object') {
                 deletingSims = deletingSims.slice(100)
 
-                await axios.post('https://directus.hoach.skryonline.com/items/yeusimsodep', newSims, {
+                await axios.post('https://directus.hoachnt.com/items/yeusimsodep', newSims, {
                     headers: {
                         Authorization: `Bearer ${access_token}`
                     }
